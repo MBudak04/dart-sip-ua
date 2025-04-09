@@ -126,7 +126,7 @@ class _MyRegisterWidget extends State<RegisterWidget>
 
     _saveSettings();
 
-       currentUser.register(SipUser(
+    currentUser.register(SipUser(
         selectedTransport: _selectedTransport,
         wsExtraHeaders: _wsExtraHeaders,
         sipUri: _sipUriController.text,

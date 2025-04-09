@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:logger/logger.dart';
 import 'package:sdp_transform/sdp_transform.dart' as sdp_transform;
+import 'package:sip_ua/src/transports/udp_socket.dart';
 
 import 'package:sip_ua/src/uri.dart';
 import 'config.dart';
@@ -160,6 +161,13 @@ class SIPUAHelper extends EventManager {
           uaSettings.webSocketUrl ?? 'wss://tryit.jssip.net:10443',
           messageDelay: _settings.sip_message_delay,
           webSocketSettings: uaSettings.webSocketSettings);
+      _settings.sockets!.add(socket);
+    }
+
+    if (uaSettings.transportType == TransportType.UDP) {
+      SIPUAUdpSocket socket = SIPUAUdpSocket(
+          uaSettings.host ?? '0.0.0.0', uaSettings.port ?? '5090',
+          messageDelay: 1);
       _settings.sockets!.add(socket);
     }
 
